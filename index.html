@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html>
 <script>
-function search() {
+function search(str) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      window.alert(this.responseText);
+      document.getElementById("result").innerHTML = this.responseText;
     }
   };
-  xmlhttp.open("GET", "request.php?q=definition", true);
+  xmlhttp.open("GET", "request.php?q="+str, true);
   xmlhttp.send();
 }
 </script>
 
 <body>
-<button onclick="search()">Search</button>
+<h1>Web Dictionary</h1>
+
+<form> 
+  <input type="text" name="word" id="word">
+</form>
+<button type="submit" value="search" onclick="search(document.getElementById('word').value)">Search</button>
+
+<div id=result></div>
+</body>
 </body>
 </html>
